@@ -1,9 +1,21 @@
 const express = require('express');
 const app = express();
-const productRouter = require('./api/routes/products');
-const ordersRouter = require('./api/routes/orders');
+const dotenv = require('dotenv');
+dotenv.config();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
+const productRouter = require('./api/routes/products');
+const ordersRouter = require('./api/routes/orders');
+
+mongoose.set('strictQuery', true);
+mongoose.connect(
+  `mongodb+srv://mtseo:${process.env.DB_PWD}@cluster0.nxorzkg.mongodb.net/?retryWrites=true&w=majority`,
+  {
+    useNewUrlParser: true,
+  }
+);
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
