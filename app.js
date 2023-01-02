@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 
 const productRouter = require('./api/routes/products');
 const ordersRouter = require('./api/routes/orders');
+const userRouter = require('./api/routes/user');
 
 mongoose.set('strictQuery', true);
 mongoose.connect(
@@ -24,6 +25,7 @@ app.use(bodyParser.json());
 // Routes which should handle requests
 app.use('/products', productRouter);
 app.use('/orders', ordersRouter);
+app.use('/user', userRouter);
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
